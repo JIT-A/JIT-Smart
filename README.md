@@ -89,3 +89,39 @@ sh train_jitsmart_loss_weight.sh
   ```
 
 
+
+# Some attempts:
+We have previously attempted to solve DP and DL tasks with a single network. The results also reflect from the side that JIT-Smart learns jointly through DP and DL network multi-tasks, and the granularity of the captured feature information is also different. Joint modeling and joint optimization is conducive to mutual promotion of their performance. It can also be confirmed from the experimental results that JIT-Smart outperforms the existing optimal methods.
+
+**Attempt 1:** The following is the test result of our modeling using only CodeBERT (the same as the input form of DLN in JIT-Smart, a two-dimensional matrix). In this modeling method, token-level modeling is performed on the first six layers of BERT, and line-level modeling is performed on the last six layers. The results show that this structure also outperforms previous methods on all metrics, but far worse than JIT-Smart on DL tasks. The reason why this design performs worse than JIT-Smart is that it is difficult to use commit-level learning (commit-level semantic features, expert features and commit-level labels) to guide line-level prediction results so that reducing false positives.
+  
+**Commit-level:**
+- F1 = 0.456
+- AUC = 0.887
+- Recall@20%Effort = 0.813
+- Effort@20%Recall = 0.012
+- Popt = 0.943  
+
+**Line-level:**
+- Top-5-ACC = 0.231
+- Top-10-ACC = 0.235
+- Recall@20%Effort_line = 0.259
+- Effort@20%Recall_line = 0.294
+- IFA = 96.618
+
+**Attempt 2:** The following is the test result of our modeling using only DLN (the same as the input form of DLN in JIT-Smart, a two-dimensional matrix). The results show that the structure is far worse than JIT-Smart in all metrics. The reason why this design performs worse than JIT-Smart is also that it is difficult to use commit-level learning (commit-level semantic features, expert features and commit-level labels) to guide line-level prediction results so that reducing false positives.
+
+**Commit-level:**  
+- F1 = 0.36
+- AUC = 0.853
+- Recall@20%Effort = 0.782
+- Effort@20%Recall = 0.512
+- Popt = 0.935  
+
+**Line-level:**  
+- Top-5-ACC = 0.43
+- Top-10-ACC = 0.29
+- Recall@20%Effort_line = 0.605
+- Effort@20%Recall_line = 0.29
+- IFA = 0.405
+

@@ -2,7 +2,7 @@
 
 
 
-This repository contains the source code and the guidelines for reproducing the paper "JIT-Smart: A A Multi-Task Learning Framework for Just-In-Time Defect Prediction and Localization"
+This repository contains the source code and the guidelines for reproducing the paper "JIT-Smart: A Multi-Task Learning Framework for Just-In-Time Defect Prediction and Localization"
 
 
 The reproduction steps are as follows:
